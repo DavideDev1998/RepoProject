@@ -5,9 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class MemeBookApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(MemeBookApplication.class, args);
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(MemeBookApplication.class, args);
+    }
 }

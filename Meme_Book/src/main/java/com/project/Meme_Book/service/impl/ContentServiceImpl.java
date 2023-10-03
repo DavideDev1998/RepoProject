@@ -6,9 +6,10 @@ import com.project.Meme_Book.repository.ContentRepository;
 import com.project.Meme_Book.repository.UserRepository;
 import com.project.Meme_Book.service.GenericsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class ContentServiceImpl implements GenericsService {
     @Autowired
     ContentRepository repository;
