@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-public class UserLoginServiceLogIn implements GenericsService {
+public class UserLoginServiceImpl implements GenericsService {
     @Autowired
     UserLogInRepository repository;
     @Override
