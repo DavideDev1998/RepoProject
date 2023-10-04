@@ -20,7 +20,7 @@ public class Content {
     private Date creationDate;
     private Date modifyDate;
     private List<Commento> commento;
-    private Integer like;
+    private Like[] like;
     private Integer condivisioni;
     private UserLogin creator;
     private Argomento argomento;
