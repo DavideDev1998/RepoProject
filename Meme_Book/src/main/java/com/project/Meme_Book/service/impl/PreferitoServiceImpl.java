@@ -1,19 +1,20 @@
 package com.project.Meme_Book.service.impl;
 
-import com.project.Meme_Book.model.Argomento;
-import com.project.Meme_Book.repository.ArgomentoRepository;
+import com.project.Meme_Book.model.Preferito;
+import com.project.Meme_Book.model.User;
+import com.project.Meme_Book.repository.PreferitoRepository;
+import com.project.Meme_Book.repository.UserRepository;
 import com.project.Meme_Book.service.GenericsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
-@Service
-public class ArgomentoServiceImpl implements GenericsService {
+
+public class PreferitoServiceImpl implements GenericsService {
     @Autowired
-    ArgomentoRepository repository;
+    PreferitoRepository repository;
     @Override
     public <T> void save(T p) {
-        repository.save((Argomento) p);
+        repository.save((Preferito) p);
     }
 
     @Override

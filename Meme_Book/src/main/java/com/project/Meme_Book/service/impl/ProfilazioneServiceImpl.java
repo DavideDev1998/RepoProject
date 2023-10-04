@@ -1,21 +1,20 @@
 package com.project.Meme_Book.service.impl;
 
-import com.project.Meme_Book.model.Commento;
+import com.project.Meme_Book.model.Profilazione;
 import com.project.Meme_Book.model.User;
-import com.project.Meme_Book.repository.CommentoRepository;
+import com.project.Meme_Book.repository.ProfilazioneRepository;
 import com.project.Meme_Book.repository.UserRepository;
 import com.project.Meme_Book.service.GenericsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
-@Service
-public class CommentoServiceImpl implements GenericsService {
+
+public class ProfilazioneServiceImpl implements GenericsService {
     @Autowired
-    CommentoRepository repository;
+    ProfilazioneRepository repository;
     @Override
     public <T> void save(T p) {
-        repository.save((Commento) p);
+        repository.save((Profilazione) p);
     }
 
     @Override
@@ -28,3 +27,4 @@ public class CommentoServiceImpl implements GenericsService {
         return repository.findById(String.valueOf(id));
     }
 }
+
