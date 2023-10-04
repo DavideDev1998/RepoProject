@@ -13,7 +13,6 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-//@RequiredArgsConstructor
 public class ControllerV1 {
 
     @Autowired
@@ -37,7 +36,8 @@ public class ControllerV1 {
     @Autowired
     ProfilazioneServiceImpl profilazioneRepository;
 
-
+    @GetMapping("/f")
+    public List<Content> findAllDocument() {return contentRepository.findAll();}
 
     @GetMapping("/")
     public void insertDocument() {
@@ -73,13 +73,13 @@ public class ControllerV1 {
 
         List<Content> contenutoList1 = new ArrayList<>();
         contenutoList1.add(content1);
-        contenutoList1.add(content2);
+                contenutoList1.add(content2);
 
-        List<Content> contenutoList2 = new ArrayList<>();
+                List<Content> contenutoList2 = new ArrayList<>();
         contenutoList2.add(content2);
         contenutoList2.add(content3);
 
         System.out.println("Documents inserito con successo.");
-    }
-}
+        }
+        }
 
