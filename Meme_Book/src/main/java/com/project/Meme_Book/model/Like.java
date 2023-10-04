@@ -4,14 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "like")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "commento")
-public class Commento {
+public class Like {
 
     private String id;
-    private Like[] like;
-    private String commento;
-
+    private UserLogin user;
 }
