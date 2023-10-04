@@ -3,22 +3,24 @@ package com.project.Meme_Book.controller;
 import com.project.Meme_Book.model.UserLogin;
 import com.project.Meme_Book.service.impl.UserLoginServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class ControllerV1 {
 
-    private final UserLoginServiceImpl repository;
+    @Autowired
+    UserLoginServiceImpl repository;
 
     @GetMapping("/")
     public void insertDocument() {
         UserLogin user = new UserLogin();
-        user.setId("value2");
-        user.setEmail("value2");
-        user.setPassword("Value2");
-        user.setRoleName("USER");
+        user.setId("1");
+        user.setEmail("francescazannella91@gmail.com");
+        user.setPassword("PincoPallino98!");
+        user.setRoleName("Admin");
 
         repository.save(user);
 
