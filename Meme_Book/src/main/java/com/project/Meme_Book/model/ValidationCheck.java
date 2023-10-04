@@ -3,6 +3,7 @@ package com.project.Meme_Book.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
@@ -10,8 +11,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @Document(collection = "validationCheck")
 public class ValidationCheck {
-
+    @Id
     private String id;
     private String userName;
-    private boolean check;
+    private Boolean check;
 }
