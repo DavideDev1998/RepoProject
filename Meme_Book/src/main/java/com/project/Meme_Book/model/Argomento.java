@@ -1,5 +1,6 @@
 package com.project.Meme_Book.model;
 
+import com.mongodb.lang.NonNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,10 @@ import java.util.List;
 @Document(collection = "argomento")
 public class Argomento {
     @Id
+    @NonNull
     private String id;
+    @NonNull
     private String nameArgomento;
+
     private List<Content> contenutoList;
 }

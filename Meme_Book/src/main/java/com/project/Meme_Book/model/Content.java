@@ -1,5 +1,7 @@
 package com.project.Meme_Book.model;
 
+import com.mongodb.lang.NonNull;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,14 +16,30 @@ import java.util.List;
 @AllArgsConstructor
 public class Content {
     @Id
+    @NonNull
     private String id;
+
+    @NonNull
+    @NotEmpty
     private String url;
+
     private String didascalia;
+
+    @NonNull
     private Date creationDate;
+
     private Date modifyDate;
+
     private List<Commento> commento;
-    private Like[] like;
+
+    private List<Like> like;
+
     private Integer condivisioni;
-    private UserLogin creator;
+
+    @NonNull
+    private User creator;
+
+    @NonNull
+    @NotEmpty
     private Argomento argomento;
 }

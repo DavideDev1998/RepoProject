@@ -1,5 +1,7 @@
 package com.project.Meme_Book.model;
 
+import com.mongodb.lang.NonNull;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,8 +16,12 @@ import java.util.ArrayList;
 @Document(collection = "preferito")
 public class Preferito {
     @Id
+    @NonNull
     private String id;
-    private UserLogin userName;
+    @NonNull
+    private User userName;
+    @NonNull
+    @NotEmpty
     private ArrayList<Content> contents;
 
 }
