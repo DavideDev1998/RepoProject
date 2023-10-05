@@ -40,14 +40,11 @@ public class ControllerV1 {
 
     @Autowired
     ProfilazioneServiceImpl profilazioneRepository;
-
+    //"/CreationContent/f"//
     @GetMapping("/f")
     public List<Content> findAllDocument() {return contentRepository.findAll();}
-
+    //"/CreationContent/insert"//
     @GetMapping("/insert")
-    public void insertContent(@RequestBody RequestData request ) {
-
-
-        }
-        }
+    public void insertContent(@RequestBody RequestData request ) {}
+}
 

@@ -1,9 +1,7 @@
 package com.project.Meme_Book.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.mongodb.lang.NonNull;
 import com.project.Meme_Book.model.*;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
+//questa annotation garantisce che in caso di NULL l'applicazione non invii eccezioni ma restituisca solo i campi valorizzati
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -31,8 +30,8 @@ public class RequestData {
     private List<Commento> commentoList_Content;
     private List<Like> like_Content;
     private Integer condivisioni_Content;
-    private User creator;
-    private Argomento argomento;
+    private User creator_Content;
+    private Argomento argomento_Content;
     private String id_Like;
     private User user;
     private String id_Preferito;
