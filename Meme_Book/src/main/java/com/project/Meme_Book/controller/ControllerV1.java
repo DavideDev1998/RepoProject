@@ -45,6 +45,19 @@ public class ControllerV1 {
     public List<Content> findAllDocument() {return contentRepository.findAll();}
     //"/CreationContent/insert"//
     @GetMapping("/insert")
-    public void insertContent(@RequestBody RequestData request ) {}
+    public void insertContent(@RequestBody RequestData request ) {
+    }
+    @GetMapping("/s")
+    public void testProvaSuperCostructor() {
+     userRepository.save(
+             User.builder().age(18).
+    email("www.prova@email.it")
+                     .sex("Male")
+                        .firstName("Lollo")
+                        .lastName("il Pop")
+                        .password("Password")
+                        .roleName("User")
+                        .userName("13sempre")
+                     .build());}
 }
 
