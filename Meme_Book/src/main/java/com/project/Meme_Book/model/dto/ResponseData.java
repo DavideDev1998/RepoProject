@@ -11,11 +11,10 @@ import java.util.Date;
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-//questa annotation garantisce che in caso di NULL l'applicazione non invii eccezioni ma restituisca solo i campi valorizzati
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RequestData {
+public class ResponseData {
     private String id_Argomento;
     private String nameArgomento;
     private List<Content> contenutoList_Argomento;

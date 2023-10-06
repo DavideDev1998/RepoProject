@@ -1,19 +1,16 @@
 package com.project.Meme_Book.controller;
 
-import com.project.Meme_Book.model.Argomento;
+import com.project.Meme_Book.map.ConvertMapper;
 import com.project.Meme_Book.model.Content;
 import com.project.Meme_Book.model.User;
 import com.project.Meme_Book.model.dto.RequestData;
+import com.project.Meme_Book.model.dto.ResponseData;
 import com.project.Meme_Book.service.impl.*;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 @Log
 @RestController
@@ -40,12 +37,31 @@ public class ControllerV1 {
 
     @Autowired
     ProfilazioneServiceImpl profilazioneRepository;
+
+    @Autowired
+    ConvertMapper mapper;
+
     //"/CreationContent/f"//
     @GetMapping("/f")
     public List<Content> findAllDocument() {return contentRepository.findAll();}
     //"/CreationContent/insert"//
     @GetMapping("/insert")
-    public void insertContent(@RequestBody RequestData request ) {
+    public void insertContent(@RequestBody RequestData request) {
+
+        //Annotation @SuperBuilder
+        contentRepository.save(Content.builder().creator(request.getCreator_Content()).creationDate(request.getCreationDate_Content())
+                               .url(request.getUrl_Content()).condivisioni(request.getCondivisioni_Content()).
+                               didascalia(request.getDidascalia_Content()).argomento(request.getArgomento_Content()).build());
+
+        System.out.println("Inserimento avvenuto con successo");
+
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ResponseData> getUserById(@PathVariable Integer id) {
+        User user = (User) userRepository.findById(id);
+        ResponseData response = mapper.convertToDTO(user);
+        return ResponseEntity.ok(response);
     }
     @GetMapping("/s")
     public void testProvaSuperCostructor() {
