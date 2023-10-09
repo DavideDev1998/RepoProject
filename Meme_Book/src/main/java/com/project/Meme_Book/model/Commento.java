@@ -10,6 +10,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
+
 @SuperBuilder
 @Data
 @NoArgsConstructor
@@ -22,5 +23,9 @@ public class Commento {
     @NonNull
     @NotEmpty
     private String commento;
+
+    @NonNull
+    @NotEmpty
+    private User creatorCommento;
 
 }
