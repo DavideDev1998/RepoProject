@@ -26,7 +26,7 @@ public class ValidationCheckServiceImpl implements GenericsService {
 
     @Override
     public <T> Object findById(String id) {
-        return repository.findById(id);
+        return repository.findById(id).get();
     }
 }
 
