@@ -8,7 +8,7 @@ public interface GenericsService {
 
     public <T> List<T> findAll();
 
-    public <T> Object findById(Integer id);
+    public <T> Object findById(String id);
 
 
 }

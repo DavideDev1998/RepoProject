@@ -1,11 +1,13 @@
 package com.project.Meme_Book.controller;
 
 import com.project.Meme_Book.map.ConvertMapper;
+import com.project.Meme_Book.model.Argomento;
 import com.project.Meme_Book.model.Content;
 import com.project.Meme_Book.model.User;
 import com.project.Meme_Book.model.dto.RequestData;
 import com.project.Meme_Book.model.dto.ResponseData;
 import com.project.Meme_Book.service.impl.*;
+import jakarta.websocket.server.PathParam;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -45,23 +47,21 @@ public class ControllerV1 {
     @GetMapping("/f")
     public List<Content> findAllDocument() {return contentRepository.findAll();}
     //"/CreationContent/insert"//
-    @GetMapping("/insert")
+    @PostMapping("/insert")
     public void insertContent(@RequestBody RequestData request) {
 
         //Annotation @SuperBuilder
-        contentRepository.save(Content.builder().creator(request.getCreator_Content()).creationDate(request.getCreationDate_Content())
+        contentRepository.save(Content.builder().creator((User) userRepository.findById(request.getId_Content())).creationDate(request.getCreationDate_Content())
                                .url(request.getUrl_Content()).condivisioni(request.getCondivisioni_Content()).
-                               didascalia(request.getDidascalia_Content()).argomento(request.getArgomento_Content()).build());
+                               didascalia(request.getDidascalia_Content()).argomento((Argomento) argsRepository.findById(request.getId_Argomento())).build());
 
         System.out.println("Inserimento avvenuto con successo");
 
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ResponseData> getUserById(@PathVariable Integer id) {
-        User user = (User) userRepository.findById(id);
-        ResponseData response = mapper.convertToDTO(user);
-        return ResponseEntity.ok(response);
+    public ResponseEntity<ResponseData> getUserById(@PathVariable("id") String id) {
+        return ResponseEntity.ok(mapper.convertToDTO((User) userRepository.findById(id)));
     }
     @GetMapping("/s")
     public void testProvaSuperCostructor() {

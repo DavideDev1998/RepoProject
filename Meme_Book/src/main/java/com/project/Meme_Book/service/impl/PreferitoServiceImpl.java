@@ -25,7 +25,7 @@ public class PreferitoServiceImpl implements GenericsService {
     }
 
     @Override
-    public <T> Object findById(Integer id) {
-        return repository.findById(String.valueOf(id));
+    public <T> Object findById(String id) {
+        return repository.findById(id);
     }
 }
