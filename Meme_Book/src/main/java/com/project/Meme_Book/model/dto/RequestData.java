@@ -27,7 +27,9 @@ public class RequestData {
     private String didascalia_Content;
     private Date creationDate_Content;
     private Date modifyDate_Content;
-    private List<Commento> commentoList_Content = new ArrayList<>();
+
+
+    private List<Commento> commentoList_Content ;
     private List<Like> like_Content;
     private Integer condivisioni_Content;
     private String creator_Content;
@@ -56,4 +58,7 @@ public class RequestData {
     private String id_ValidationCheck;
     private String userName_ValidationCheck;
     private Boolean check_ValidationCheck;
+
+
+
 }

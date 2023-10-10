@@ -26,6 +26,6 @@ public class Commento {
 
     @NonNull
     @NotEmpty
-    private User creatorCommento;
+    private String creatorCommento;
 
 }

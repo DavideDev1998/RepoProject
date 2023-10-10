@@ -54,15 +54,13 @@ public class ControllerV1 {
     //"/CreationContent/insert"//
     @PostMapping("/insertContent")
     public void insertContent(@RequestBody RequestData request) {
-        List<Commento> commenti = request.getCommentoList_Content();
-    commenti.add(new Commento(null, null, "BELLA GIANDAAAAA", (User) userRepository.findById("1")));
-        //Annotation @SuperBuilder
+
         contentRepository.save(Content.builder()
                 .creator((User) userRepository.findById(request.getId_Content()))
                 .creationDate(request.getCreationDate_Content())
                 .url(request.getUrl_Content())
                 .condivisioni(request.getCondivisioni_Content())
-                .commento(commenti)
+                .commento(request.getCommentoList_Content())
                 .didascalia(request.getDidascalia_Content())
                 .argomento((Argomento) argsRepository.findById(request.getId_Argomento()))
                 .build());
