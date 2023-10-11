@@ -19,7 +19,6 @@ public class RequestData {
     private String id_Argomento;
     private String nameArgomento;
     private List<Content> contenutoList_Argomento;
-    private String id_Commento;
     private List<Like> like_Commento;
     private String commento;
     private String id_Content;
@@ -33,7 +32,6 @@ public class RequestData {
     private Integer condivisioni_Content;
     private String creator_Content;
     private String argomento_Content;
-    private String id_Like;
     private String id_Preferito;
     private String userName;
     private ArrayList<Content> contents_Preferito;
@@ -57,7 +55,5 @@ public class RequestData {
     private String id_ValidationCheck;
     private String userName_ValidationCheck;
     private Boolean check_ValidationCheck;
-
-
 
 }

@@ -16,9 +16,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @SuperBuilder
 public class Like {
-    @Id
 
-    private String id;
     @NonNull
     @NotEmpty
     private User user;

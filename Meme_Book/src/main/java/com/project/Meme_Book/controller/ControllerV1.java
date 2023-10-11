@@ -1,10 +1,7 @@
 package com.project.Meme_Book.controller;
 
 import com.project.Meme_Book.map.ConvertMapper;
-import com.project.Meme_Book.model.Argomento;
-import com.project.Meme_Book.model.Commento;
-import com.project.Meme_Book.model.Content;
-import com.project.Meme_Book.model.User;
+import com.project.Meme_Book.model.*;
 import com.project.Meme_Book.model.dto.RequestData;
 import com.project.Meme_Book.model.dto.ResponseData;
 import com.project.Meme_Book.service.impl.*;
@@ -96,6 +93,38 @@ public class ControllerV1 {
                 .creationDate(content.getCreationDate())
                 .modifyDate(request.getModifyDate())
                 .commento(commenti)
+                .build());
+
+        log.info("Inserimento avvenuto con successo");
+
+
+    }
+
+    @PostMapping("/IlikeIt")
+    public void insertLikeToContent(@RequestBody RequestData request) {
+
+        Content content = (Content) contentRepository.findById(request.getId_Content());
+
+        List<Like> likes = new ArrayList<>();
+
+        for(int i = 0; i < request.getLike_Content().size(); i++){
+
+            Like like = request.getLike_Content().get(i);
+
+            User user = like.getUser();
+
+            like.setUser((User) userRepository.findById(user.getId()));
+
+            likes.add(like);
+        }
+
+        contentRepository.save(Content.builder()
+                .id(content.getId())
+                .url(content.getUrl())
+                .creator(content.getCreator())
+                .creationDate(content.getCreationDate())
+                .modifyDate(request.getModifyDate())
+                .like(likes)
                 .build());
 
         log.info("Inserimento avvenuto con successo");
