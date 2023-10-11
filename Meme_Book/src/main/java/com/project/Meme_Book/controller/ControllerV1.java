@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Log
@@ -56,14 +58,46 @@ public class ControllerV1 {
     public void insertContent(@RequestBody RequestData request) {
 
         contentRepository.save(Content.builder()
-                .creator((User) userRepository.findById(request.getId_Content()))
-                .creationDate(request.getCreationDate_Content())
+                .creator((User) userRepository.findById(request.getId_User()))
+                .creationDate(request.getCreationDate())
                 .url(request.getUrl_Content())
                 .condivisioni(request.getCondivisioni_Content())
                 .commento(request.getCommentoList_Content())
                 .didascalia(request.getDidascalia_Content())
                 .argomento((Argomento) argsRepository.findById(request.getId_Argomento()))
                 .build());
+        log.info("Inserimento avvenuto con successo");
+
+
+    }
+
+    @PostMapping("/insertComment")
+    public void insertCommento(@RequestBody RequestData request) {
+
+        Content content = (Content) contentRepository.findById(request.getId_Content());
+
+        List<Commento> commenti = new ArrayList<>();
+
+        for(int i = 0; i < request.getCommentoList_Content().size(); i++){
+
+            Commento commento = request.getCommentoList_Content().get(i);
+
+            User user = commento.getCreatorCommento();
+
+            commento.setCreatorCommento((User) userRepository.findById(user.getId()));
+
+            commenti.add(commento);
+        }
+
+        contentRepository.save(Content.builder()
+                .id(content.getId())
+                .url(content.getUrl())
+                .creator(content.getCreator())
+                .creationDate(content.getCreationDate())
+                .modifyDate(request.getModifyDate())
+                .commento(commenti)
+                .build());
+
         log.info("Inserimento avvenuto con successo");
 
 

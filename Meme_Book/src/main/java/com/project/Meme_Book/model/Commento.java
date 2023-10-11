@@ -9,6 +9,7 @@ import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
 import java.util.List;
 
 @SuperBuilder
@@ -27,5 +28,8 @@ public class Commento {
     @NonNull
     @NotEmpty
     private User creatorCommento;
+
+    @NonNull
+    private Date creationDate;
 
 }

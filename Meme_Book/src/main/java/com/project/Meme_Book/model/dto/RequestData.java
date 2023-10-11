@@ -25,10 +25,9 @@ public class RequestData {
     private String id_Content;
     private String url_Content;
     private String didascalia_Content;
-    private Date creationDate_Content;
-    private Date modifyDate_Content;
-
-
+    private Date creationDate;
+    private Date modifyDate;
+    private String creatorCommento;
     private List<Commento> commentoList_Content ;
     private List<Like> like_Content;
     private Integer condivisioni_Content;
