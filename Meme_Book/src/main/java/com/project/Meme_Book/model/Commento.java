@@ -18,7 +18,8 @@ import java.util.List;
 @AllArgsConstructor
 @Document(collection = "commento")
 public class Commento {
-
+    @Id
+    private String id;
     private List<Like> like;
     @NonNull
     @NotEmpty

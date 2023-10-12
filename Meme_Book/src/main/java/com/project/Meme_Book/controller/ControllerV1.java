@@ -1,11 +1,13 @@
 package com.project.Meme_Book.controller;
 
 import com.project.Meme_Book.map.ConvertMapper;
+import com.project.Meme_Book.model.Argomento;
+import com.project.Meme_Book.model.Content;
+import com.project.Meme_Book.model.User;
 import com.project.Meme_Book.model.*;
 import com.project.Meme_Book.model.dto.RequestData;
 import com.project.Meme_Book.model.dto.ResponseData;
 import com.project.Meme_Book.service.impl.*;
-import jakarta.websocket.server.PathParam;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -55,7 +57,7 @@ public class ControllerV1 {
     public void insertContent(@RequestBody RequestData request) {
 
         contentRepository.save(Content.builder()
-                .creator((User) userRepository.findById(request.getId_User()))
+                .creator((User) userRepository.findById(request.getId_Content()))
                 .creationDate(request.getCreationDate())
                 .url(request.getUrl_Content())
                 .condivisioni(request.getCondivisioni_Content())
@@ -72,29 +74,9 @@ public class ControllerV1 {
     public void insertCommento(@RequestBody RequestData request) {
 
         Content content = (Content) contentRepository.findById(request.getId_Content());
-
-        List<Commento> commenti = new ArrayList<>();
-
-        for(int i = 0; i < request.getCommentoList_Content().size(); i++){
-
-            Commento commento = request.getCommentoList_Content().get(i);
-
-            User user = commento.getCreatorCommento();
-
-            commento.setCreatorCommento((User) userRepository.findById(user.getId()));
-
-            commenti.add(commento);
-        }
-
-        contentRepository.save(Content.builder()
-                .id(content.getId())
-                .url(content.getUrl())
-                .creator(content.getCreator())
-                .creationDate(content.getCreationDate())
-                .modifyDate(request.getModifyDate())
-                .commento(commenti)
-                .build());
-
+        Commento commento = new Commento(null, request.getLike_Content(), request.getCommento(), (User) userRepository.findById(request.getCreatorCommento()), request.getCreationDate());
+        content.getCommento().add(commento);
+        contentRepository.save(content);
         log.info("Inserimento avvenuto con successo");
 
 
@@ -107,7 +89,7 @@ public class ControllerV1 {
 
         List<Like> likes = new ArrayList<>();
 
-        for(int i = 0; i < request.getLike_Content().size(); i++){
+        for (int i = 0; i < request.getLike_Content().size(); i++) {
 
             Like like = request.getLike_Content().get(i);
 
