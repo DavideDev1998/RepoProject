@@ -11,7 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Log
 @RestController
@@ -126,7 +128,6 @@ public class ControllerV1 {
         contentRepository.save(content);
 
         log.info("Inserimento avvenuto con successo");
-
 
     }
 
