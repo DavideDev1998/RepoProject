@@ -41,7 +41,7 @@ public class Content {
     @NonNull
     private User creator;
 
-
+    @NonNull
     @NotEmpty
     private Argomento argomento;
 }

@@ -5,14 +5,12 @@ import com.project.Meme_Book.model.*;
 import com.project.Meme_Book.model.dto.RequestData;
 import com.project.Meme_Book.model.dto.ResponseData;
 import com.project.Meme_Book.service.impl.*;
-import jakarta.websocket.server.PathParam;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Log
@@ -73,30 +71,22 @@ public class ControllerV1 {
 
         Content content = (Content) contentRepository.findById(request.getId_Content());
 
-        List<Commento> commenti = new ArrayList<>();
+        Commento commento = new Commento(null,request.getCommento(),(User)userRepository.findById(request.getId_User()),request.getCreationDate());
 
-        for(int i = 0; i < request.getCommentoList_Content().size(); i++){
+        if(content.getCommento() == null){
 
-            Commento commento = request.getCommentoList_Content().get(i);
-
-            User user = commento.getCreatorCommento();
-
-            commento.setCreatorCommento((User) userRepository.findById(user.getId()));
-
+            List<Commento> commenti = new ArrayList<>();
             commenti.add(commento);
-        }
+            content.setCommento(commenti);
 
-        contentRepository.save(Content.builder()
-                .id(content.getId())
-                .url(content.getUrl())
-                .creator(content.getCreator())
-                .creationDate(content.getCreationDate())
-                .modifyDate(request.getModifyDate())
-                .commento(commenti)
-                .build());
+        }else{
+
+            content.getCommento().add(commento);
+
+        }
+        contentRepository.save(content);
 
         log.info("Inserimento avvenuto con successo");
-
 
     }
 
@@ -105,27 +95,21 @@ public class ControllerV1 {
 
         Content content = (Content) contentRepository.findById(request.getId_Content());
 
-        List<Like> likes = new ArrayList<>();
+        Like like = new Like((User)userRepository.findById(request.getId_User()));
 
-        for(int i = 0; i < request.getLike_Content().size(); i++){
+        if(content.getLike() == null){
 
-            Like like = request.getLike_Content().get(i);
-
-            User user = like.getUser();
-
-            like.setUser((User) userRepository.findById(user.getId()));
-
+            List<Like> likes = new ArrayList<>();
             likes.add(like);
+            content.setLike(likes);
+
+        }else{
+
+            content.getLike().add(like);
+
         }
 
-        contentRepository.save(Content.builder()
-                .id(content.getId())
-                .url(content.getUrl())
-                .creator(content.getCreator())
-                .creationDate(content.getCreationDate())
-                .modifyDate(request.getModifyDate())
-                .like(likes)
-                .build());
+        contentRepository.save(content);
 
         log.info("Inserimento avvenuto con successo");
 

@@ -28,6 +28,7 @@ public class RequestData {
     private Date modifyDate;
     private String creatorCommento;
     private List<Commento> commentoList_Content ;
+    private String id_Like;
     private List<Like> like_Content;
     private Integer condivisioni_Content;
     private String creator_Content;
