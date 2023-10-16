@@ -1,9 +1,7 @@
 package com.project.Meme_Book.service.impl;
 
 import com.project.Meme_Book.model.Segnalazione;
-import com.project.Meme_Book.model.User;
 import com.project.Meme_Book.repository.SegnalazioneRepository;
-import com.project.Meme_Book.repository.UserRepository;
 import com.project.Meme_Book.service.GenericsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
