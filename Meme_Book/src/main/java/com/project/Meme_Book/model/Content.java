@@ -9,8 +9,10 @@ import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 @Document(collection = "content")
 @Data
 @NoArgsConstructor
@@ -44,4 +46,12 @@ public class Content {
     @NonNull
     @NotEmpty
     private Argomento argomento;
+
+    public List<Like> getLike() {
+        return like == null ? new ArrayList<>() : this.like;
+    }
+
+    public List<Commento> getCommento() {
+        return commento == null ? new ArrayList<>() : this.commento;
+    }
 }

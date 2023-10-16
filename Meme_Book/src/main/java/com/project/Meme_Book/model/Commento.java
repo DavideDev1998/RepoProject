@@ -9,6 +9,7 @@ import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -31,4 +32,7 @@ public class Commento {
     @NonNull
     private Date creationDate;
 
+    public List<Like> getLike() {
+        return like == null ? new ArrayList<>() : this.like;
+    }
 }

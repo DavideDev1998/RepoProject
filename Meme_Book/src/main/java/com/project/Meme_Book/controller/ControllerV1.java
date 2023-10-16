@@ -5,6 +5,7 @@ import com.project.Meme_Book.model.*;
 import com.project.Meme_Book.model.dto.RequestData;
 import com.project.Meme_Book.model.dto.ResponseData;
 import com.project.Meme_Book.service.impl.*;
+import com.project.Meme_Book.utils.MethodsUtils;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -44,6 +45,9 @@ public class ControllerV1 {
     @Autowired
     ConvertMapper mapper;
 
+    @Autowired
+    MethodsUtils utils;
+
     //"/CreationContent/f"//
     @GetMapping("/f")
     public List<Content> findAllDocument() {
@@ -73,19 +77,8 @@ public class ControllerV1 {
 
         Content content = (Content) contentRepository.findById(request.getId_Content());
 
-        Commento commento = new Commento(null,request.getCommento(),(User)userRepository.findById(request.getId_User()),request.getCreationDate());
+        content.getCommento().add(new Commento(null, request.getCommento(),(User) userRepository.findById(request.getId_User()), request.getCreationDate()));
 
-        if(content.getCommento() == null){
-
-            List<Commento> commenti = new ArrayList<>();
-            commenti.add(commento);
-            content.setCommento(commenti);
-
-        }else{
-
-            content.getCommento().add(commento);
-
-        }
         contentRepository.save(content);
 
         log.info("Inserimento avvenuto con successo");
@@ -97,19 +90,28 @@ public class ControllerV1 {
 
         Content content = (Content) contentRepository.findById(request.getId_Content());
 
-        Like like = new Like((User)userRepository.findById(request.getId_User()));
+        content.getLike().add(new Like((User) userRepository.findById(request.getId_User())));
 
-        if(content.getLike() == null){
+        contentRepository.save(content);
 
-            List<Like> likes = new ArrayList<>();
-            likes.add(like);
-            content.setLike(likes);
+        log.info("Inserimento avvenuto con successo");
 
-        }else{
+    }
 
-            content.getLike().add(like);
+    @PostMapping("/IlikeComment")
+    public void insertLikeToCommento(@RequestBody RequestData request) {
 
-        }
+        Content content = (Content) contentRepository.findById(request.getId_Content());
+
+        Commento commento = utils.commentoDaModificare(content.getCommento(), request.getCommento());
+
+        //Ho dovuto farlo per forza in maniera estesa perchè non il like dell'utente mi risultava sempre vuoto con la tua soluzione
+        //non so il perchè :(
+        Like like = new Like((User) userRepository.findById(request.getId_User()));
+
+        commento.getLike().add(like);
+
+        content.getCommento().add(new Commento(commento.getLike(), commento.getCommento(), commento.getCreatorCommento(), commento.getCreationDate()));
 
         contentRepository.save(content);
 
