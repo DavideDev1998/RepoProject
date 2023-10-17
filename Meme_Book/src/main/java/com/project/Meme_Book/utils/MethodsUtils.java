@@ -2,6 +2,7 @@ package com.project.Meme_Book.utils;
 
 import com.project.Meme_Book.model.Commento;
 import com.project.Meme_Book.model.Content;
+import com.project.Meme_Book.model.User;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
@@ -30,7 +31,7 @@ public class MethodsUtils {
         }
     }
 
-    public void createLikeMap(Content content, String username, String idUser){
+    public void createLikeMap(Content content, String idUser, String username){
 
         if(content.getLike() != null){
 

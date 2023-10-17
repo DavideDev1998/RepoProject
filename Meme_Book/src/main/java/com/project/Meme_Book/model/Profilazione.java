@@ -9,6 +9,7 @@ import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Data
@@ -25,7 +26,7 @@ public class Profilazione {
     private User userName;
     @NonNull
     @NotEmpty
-    private List<Like> like;
+    private HashMap<String,String> like;
     @NonNull
     @NotEmpty
     private Argomento nomeArgomento;

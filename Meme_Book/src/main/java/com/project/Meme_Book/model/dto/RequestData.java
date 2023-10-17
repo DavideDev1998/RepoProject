@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -19,7 +20,7 @@ public class RequestData {
     private String id_Argomento;
     private String nameArgomento;
     private List<Content> contenutoList_Argomento;
-    private List<Like> like_Commento;
+    private HashMap<String,String> like_Commento;
     private String commento;
     private String id_Content;
     private String url_Content;
@@ -29,7 +30,7 @@ public class RequestData {
     private String creatorCommento;
     private List<Commento> commentoList_Content ;
     private String id_Like;
-    private List<Like> like_Content;
+    private HashMap<String,String> like_Content;
     private Integer condivisioni_Content;
     private String creator_Content;
     private String argomento_Content;
@@ -38,7 +39,7 @@ public class RequestData {
     private ArrayList<Content> contents_Preferito;
     private String id_Profilizione;
     private String userName_Profilazione;
-    private List<Like> like__Profilazione;
+    private HashMap<String,String> like_Profilazione;
     private String nomeArgomento_Profilazione;
     private String id_Segnalazione;
     private String user_Segnalazione;

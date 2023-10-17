@@ -91,7 +91,7 @@ public class ControllerV1 {
 
         User user = (User) userRepository.findById(request.getId_User());
 
-        utils.createLikeMap(content, user.getUserName(), request.getId_User());
+        utils.createLikeMap(content, user.getId(), user.getUserName());
 
         contentRepository.save(content);
 
