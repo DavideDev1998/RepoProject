@@ -63,7 +63,6 @@ public class ControllerV1 {
                 .creationDate(request.getCreationDate())
                 .url(request.getUrl_Content())
                 .condivisioni(request.getCondivisioni_Content())
-                .commento(request.getCommentoList_Content())
                 .didascalia(request.getDidascalia_Content())
                 .argomento((Argomento) argsRepository.findById(request.getId_Argomento()))
                 .build());
@@ -71,18 +70,13 @@ public class ControllerV1 {
 
 
     }
-    // TODO: 17/10/2023 (SUCCESSIVAMENTE) IMPLEMENTARE REST TEMPLETE PER DIALOGARE CON API ESTERNE()
-    // TODO: 17/10/2023 INSERIRE METODO findContentByUser
-    // TODO: 17/10/2023 INSERIRE METODO findContentByArguments
-    // TODO: 17/10/2023 ....
-    // TODO: 17/10/2023 INIZIARE LATO FRONT-END  HTML -CSS -JS
 
-    @PostMapping("/IlikeIt")
-    public void insertLikeToContent(@RequestBody RequestData request) {
+    @PostMapping("/insertComment")
+    public void insertCommento(@RequestBody RequestData request) {
 
         Content content = (Content) contentRepository.findById(request.getId_Content());
 
-        content.getLike().add(new Like((User)userRepository.findById(request.getId_User())));
+        utils.createCommentMap(content, utils.generateUniqueString(), new Commento(null,request.getCommento(), (User) userRepository.findById(request.getId_User()), request.getCreationDate()));
 
         contentRepository.save(content);
 
@@ -90,14 +84,33 @@ public class ControllerV1 {
 
     }
 
-    @PostMapping("/IlikeComment")
+    @PostMapping("/IlikeIt")
+    public void insertLikeToContent(@RequestBody RequestData request) {
+
+        Content content = (Content) contentRepository.findById(request.getId_Content());
+
+        User user = (User) userRepository.findById(request.getId_User());
+
+        utils.createLikeMap(content, user.getUserName(), request.getId_User());
+
+        contentRepository.save(content);
+
+        log.info("Inserimento avvenuto con successo");
+
+    }
+
+    /*@PostMapping("/IlikeComment")
     public void insertLikeToComment(@RequestBody RequestData request) {
 
         Content content = (Content) contentRepository.findById(request.getId_Content());
 
         Commento commento = utils.commentoDaModificare(content.getCommento(), request.getCommento());
-        
-        commento.getLike().add(new Like((User)userRepository.findById(request.getId_User())));
+
+        //Ho dovuto farlo per forza in maniera estesa perchè con la tua soluzione il like dell'utente mi risultava sempre vuoto,
+        // non so il perchè
+
+        Like like = new Like((User)userRepository.findById(request.getId_User()));
+        commento.getLike().add(like);
 
         content.getCommento().add(new Commento(commento.getLike(), commento.getCommento(), commento.getCreatorCommento(), commento.getCreationDate()));
 
@@ -105,7 +118,7 @@ public class ControllerV1 {
 
         log.info("Inserimento avvenuto con successo");
 
-    }
+    }*/
 
     @GetMapping("/{id}")
     public ResponseEntity<ResponseData> getUserById(@PathVariable("id") String id) {

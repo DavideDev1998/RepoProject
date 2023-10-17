@@ -11,6 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 @Document(collection = "content")
@@ -34,9 +35,9 @@ public class Content {
 
     private Date modifyDate;
 
-    private List<Commento> commento;
+    private HashMap<String,Commento> commento;
 
-    private List<Like> like;
+    private HashMap<String, String> like;
 
     private Integer condivisioni;
 
@@ -47,11 +48,4 @@ public class Content {
     @NotEmpty
     private Argomento argomento;
 
-    public List<Like> getLike() {
-        return like == null ? new ArrayList<>() : this.like;
-    }
-
-    public List<Commento> getCommento() {
-        return commento == null ? new ArrayList<>() : this.commento;
-    }
 }
