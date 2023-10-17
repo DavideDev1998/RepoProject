@@ -44,21 +44,17 @@ public class MethodsUtils {
         }
     }
 
-    /*public Commento commentoDaModificare(List<Commento> commenti, String didascaliaCommento){
+    public void createLikeCommentMap(Commento commento, String idUser, String username){
 
-        Commento commentoRecuperato = new Commento();
+        if(commento.getLike() != null){
 
-        for(Commento commento : commenti){
+            commento.getLike().put(idUser, username);
 
-            if(commento.getCommento().equals(didascaliaCommento)){
-
-                commentoRecuperato = commento;
-
-            }
+        }else{
+            HashMap<String, String> likeMap = new HashMap<>();
+            commento.setLike(likeMap);
+            commento.getLike().put(idUser, username);
         }
+    }
 
-        commenti.remove(commentoRecuperato);
-
-        return commentoRecuperato;
-    }*/
 }

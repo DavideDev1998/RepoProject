@@ -21,6 +21,7 @@ public class RequestData {
     private String nameArgomento;
     private List<Content> contenutoList_Argomento;
     private HashMap<String,String> like_Commento;
+    private String id_commento;
     private String commento;
     private String id_Content;
     private String url_Content;

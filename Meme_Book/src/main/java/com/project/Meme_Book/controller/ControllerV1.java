@@ -99,26 +99,27 @@ public class ControllerV1 {
 
     }
 
-    /*@PostMapping("/IlikeComment")
+    @PostMapping("/IlikeComment")
     public void insertLikeToComment(@RequestBody RequestData request) {
 
         Content content = (Content) contentRepository.findById(request.getId_Content());
 
-        Commento commento = utils.commentoDaModificare(content.getCommento(), request.getCommento());
+        Commento commento = content.getCommento().get(request.getId_commento());
+
+        User user = (User) userRepository.findById(request.getId_User());
 
         //Ho dovuto farlo per forza in maniera estesa perchè con la tua soluzione il like dell'utente mi risultava sempre vuoto,
         // non so il perchè
 
-        Like like = new Like((User)userRepository.findById(request.getId_User()));
-        commento.getLike().add(like);
+        utils.createLikeCommentMap(commento, user.getId(), user.getUserName());
 
-        content.getCommento().add(new Commento(commento.getLike(), commento.getCommento(), commento.getCreatorCommento(), commento.getCreationDate()));
+        utils.createCommentMap(content, request.getId_commento(), commento);
 
         contentRepository.save(content);
 
         log.info("Inserimento avvenuto con successo");
 
-    }*/
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<ResponseData> getUserById(@PathVariable("id") String id) {
