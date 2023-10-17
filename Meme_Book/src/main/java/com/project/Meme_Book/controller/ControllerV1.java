@@ -71,19 +71,11 @@ public class ControllerV1 {
 
 
     }
-
-    @PostMapping("/insertComment")
-    public void insertCommento(@RequestBody RequestData request) {
-
-        Content content = (Content) contentRepository.findById(request.getId_Content());
-
-        content.getCommento().add(new Commento(null,request.getCommento(),(User)userRepository.findById(request.getId_User()),request.getCreationDate()));
-
-        contentRepository.save(content);
-
-        log.info("Inserimento avvenuto con successo");
-
-    }
+    // TODO: 17/10/2023 (SUCCESSIVAMENTE) IMPLEMENTARE REST TEMPLETE PER DIALOGARE CON API ESTERNE()
+    // TODO: 17/10/2023 INSERIRE METODO findContentByUser
+    // TODO: 17/10/2023 INSERIRE METODO findContentByArguments
+    // TODO: 17/10/2023 ....
+    // TODO: 17/10/2023 INIZIARE LATO FRONT-END  HTML -CSS -JS
 
     @PostMapping("/IlikeIt")
     public void insertLikeToContent(@RequestBody RequestData request) {
@@ -104,12 +96,8 @@ public class ControllerV1 {
         Content content = (Content) contentRepository.findById(request.getId_Content());
 
         Commento commento = utils.commentoDaModificare(content.getCommento(), request.getCommento());
-
-        //Ho dovuto farlo per forza in maniera estesa perchè con la tua soluzione il like dell'utente mi risultava sempre vuoto,
-        // non so il perchè
-
-        Like like = new Like((User)userRepository.findById(request.getId_User()));
-        commento.getLike().add(like);
+        
+        commento.getLike().add(new Like((User)userRepository.findById(request.getId_User())));
 
         content.getCommento().add(new Commento(commento.getLike(), commento.getCommento(), commento.getCreatorCommento(), commento.getCreationDate()));
 

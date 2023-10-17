@@ -9,17 +9,16 @@ import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @SuperBuilder
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Document(collection = "commento")
 public class Commento {
-
+    @Id
+    private String id;
     private List<Like> like;
     @NonNull
     @NotEmpty
@@ -32,7 +31,13 @@ public class Commento {
     @NonNull
     private Date creationDate;
 
-    public List<Like> getLike() {
-        return like == null ? new ArrayList<>() : this.like;
+    public Commento( List<Like> like, @NonNull String commento, @NonNull User creatorCommento, @NonNull Date creationDate) {
+        this.id = id;
+        this.like = like;
+        this.commento = commento;
+        this.creatorCommento = creatorCommento;
+        this.creationDate = creationDate;
     }
+
+
 }
