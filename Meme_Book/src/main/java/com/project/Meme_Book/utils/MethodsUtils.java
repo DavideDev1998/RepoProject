@@ -21,7 +21,6 @@ public class MethodsUtils {
     public void createCommentMap(Content content, String id, Commento commento){
 
         if(content.getCommento() != null){
-
             content.getCommento().put(id, commento);
 
         }else{
@@ -47,7 +46,6 @@ public class MethodsUtils {
     public void createLikeCommentMap(Commento commento, String idUser, String username){
 
         if(commento.getLike() != null){
-
             commento.getLike().put(idUser, username);
 
         }else{

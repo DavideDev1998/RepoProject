@@ -30,8 +30,8 @@ public class ContentServiceImpl implements GenericsService {
         return repository.findById(id).get();
     }
 
-    public <T> Object findByUser(User user){
-        return repository.findByUser(user);
+    public List<Content> findByUser(String userName){
+        return repository.findByUser(userName);
     }
 
 }

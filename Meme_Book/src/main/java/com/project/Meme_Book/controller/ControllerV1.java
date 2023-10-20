@@ -23,28 +23,12 @@ public class ControllerV1 {
 
     @Autowired
     ArgomentoServiceImpl argsRepository;
-
     @Autowired
     ContentServiceImpl contentRepository;
-
-    @Autowired
-    PreferitoServiceImpl preferitoRepository;
-
-    @Autowired
-    ValidationCheckServiceImpl validationRepository;
-
     @Autowired
     UserServiceImpl userRepository;
-
-    @Autowired
-    SegnalazioneServiceRepository segnalazioneRepository;
-
-    @Autowired
-    ProfilazioneServiceImpl profilazioneRepository;
-
     @Autowired
     ConvertMapper mapper;
-
     @Autowired
     MethodsUtils utils;
 
@@ -76,7 +60,7 @@ public class ControllerV1 {
 
         Content content = (Content) contentRepository.findById(request.getId_Content());
 
-        utils.createCommentMap(content, utils.generateUniqueString(), new Commento(null,request.getCommento(), (User) userRepository.findById(request.getId_User()), request.getCreationDate()));
+        utils.createCommentMap(content, utils.generateUniqueString(), new Commento(null, request.getCommento(), (User) userRepository.findById(request.getId_User()), request.getCreationDate()));
 
         contentRepository.save(content);
 
@@ -125,11 +109,19 @@ public class ControllerV1 {
     public ResponseEntity<ResponseData> getUserById(@PathVariable("id") String id) {
         return ResponseEntity.ok(mapper.convertToDTO(userRepository.findById(id)));
     }
+//    @GetMapping("/{id}")
+//    public ResponseEntity<ResponseData> getContentrByUser(@PathVariable("id") String id) {
+//        List<Content> contentList = null;
+//
+//
+//        return ResponseEntity.ok(mapper.convertToDTO((User) userRepository.findById(id)));
+//    }
 
     @GetMapping("/ContentUser/{userId}")
     public ResponseEntity<ResponseData> getContentByUserId(@PathVariable("userId") String id) {
-        User user = (User) userRepository.findById(id);
-        return ResponseEntity.ok(mapper.convertToDTO(contentRepository.findByUser(user)));
+
+
+        return ResponseEntity.ok(mapper.convertToDTO(contentRepository.findByUser(id)));
     }
 
     @GetMapping("/Comments/{contentId}")
