@@ -1,9 +1,11 @@
 package com.project.Meme_Book.service.impl;
 
 import com.project.Meme_Book.model.Content;
+import com.project.Meme_Book.model.User;
 import com.project.Meme_Book.repository.ContentRepository;
 import com.project.Meme_Book.service.GenericsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,5 +26,9 @@ public class ContentServiceImpl implements GenericsService {
     @Override
     public <T> Object findById(String id) {
         return repository.findById(id).get();
+    }
+
+    public <T> Object findByUser(User user){
+        return repository.findByUser(user);
     }
 }

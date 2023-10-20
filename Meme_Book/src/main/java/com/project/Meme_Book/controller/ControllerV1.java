@@ -126,6 +126,12 @@ public class ControllerV1 {
         return ResponseEntity.ok(mapper.convertToDTO((User) userRepository.findById(id)));
     }
 
+    @GetMapping("/ContentUser/{userId}")
+    public ResponseEntity<ResponseData> getContentByUserId(@PathVariable("userId") String id) {
+        User user = (User) userRepository.findById(id);
+        return ResponseEntity.ok(mapper.convertToDTO((Content)contentRepository.findByUser(user)));
+    }
+
     @GetMapping("/s")
     public void testProvaSuperCostructor() {
         userRepository.save(
