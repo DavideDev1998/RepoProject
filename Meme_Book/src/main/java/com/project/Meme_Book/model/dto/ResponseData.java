@@ -16,16 +16,16 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ResponseData {
+    private String url_Content;
     private String nameArgomento;
     private List<Content> contenutoList_Argomento;
     private HashMap<String,User> like_Commento;
     private String commento;
     private String id_Content;
-    private String url_Content;
     private String didascalia_Content;
     private Date creationDate_Content;
     private Date modifyDate_Content;
-    private List<Commento> commentoList_Content;
+    private HashMap<String,Commento> commentoList_Content;
     private HashMap<String,User> like_Content;
     private Integer condivisioni_Content;
     private String creator_Content;

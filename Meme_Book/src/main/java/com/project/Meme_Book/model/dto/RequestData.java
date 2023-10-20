@@ -29,7 +29,7 @@ public class RequestData {
     private Date creationDate;
     private Date modifyDate;
     private String creatorCommento;
-    private List<Commento> commentoList_Content ;
+    private HashMap<String,Commento> commentoList_Content ;
     private String id_Like;
     private HashMap<String,String> like_Content;
     private Integer condivisioni_Content;

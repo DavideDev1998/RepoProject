@@ -123,13 +123,18 @@ public class ControllerV1 {
 
     @GetMapping("/{id}")
     public ResponseEntity<ResponseData> getUserById(@PathVariable("id") String id) {
-        return ResponseEntity.ok(mapper.convertToDTO((User) userRepository.findById(id)));
+        return ResponseEntity.ok(mapper.convertToDTO(userRepository.findById(id)));
     }
 
     @GetMapping("/ContentUser/{userId}")
     public ResponseEntity<ResponseData> getContentByUserId(@PathVariable("userId") String id) {
         User user = (User) userRepository.findById(id);
-        return ResponseEntity.ok(mapper.convertToDTO((Content)contentRepository.findByUser(user)));
+        return ResponseEntity.ok(mapper.convertToDTO(contentRepository.findByUser(user)));
+    }
+
+    @GetMapping("/Comments/{contentId}")
+    public ResponseEntity<ResponseData> getComments(@PathVariable("contentId") String id) {
+        return ResponseEntity.ok(mapper.convertToDTO((Content) contentRepository.findById(id)));
     }
 
     @GetMapping("/s")
