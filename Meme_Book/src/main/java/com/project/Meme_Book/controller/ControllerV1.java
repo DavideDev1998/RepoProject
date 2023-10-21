@@ -11,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Log
 @RestController
@@ -117,11 +114,9 @@ public class ControllerV1 {
 //        return ResponseEntity.ok(mapper.convertToDTO((User) userRepository.findById(id)));
 //    }
 
-    @GetMapping("/ContentUser/{userId}")
-    public ResponseEntity<List<Content>> getContentByUserId(@PathVariable("userId") String id) {
-
-
-        return ResponseEntity.ok(contentRepository.findByUser(id));
+    @GetMapping("/ContentUser/{userName}")
+    public ResponseEntity<List<ResponseData>> getContentByUserId(@PathVariable("userName") String userName) {
+        return ResponseEntity.ok(mapper.convertToDTOList(contentRepository.findByUser(userName)));
     }
 
     @GetMapping("/Comments/{contentId}")
