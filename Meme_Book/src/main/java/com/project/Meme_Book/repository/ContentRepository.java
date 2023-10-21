@@ -12,7 +12,7 @@ import java.util.List;
 
 @Repository
 public interface ContentRepository extends MongoRepository<Content,String> {
-    @Query("{creator.userName: ? }")
+    @Query("creator.userName: ?1 ")
     List<Content> findByUser(String user);
 
 }

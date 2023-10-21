@@ -118,10 +118,10 @@ public class ControllerV1 {
 //    }
 
     @GetMapping("/ContentUser/{userId}")
-    public ResponseEntity<ResponseData> getContentByUserId(@PathVariable("userId") String id) {
+    public ResponseEntity<List<Content>> getContentByUserId(@PathVariable("userId") String id) {
 
 
-        return ResponseEntity.ok(mapper.convertToDTO(contentRepository.findByUser(id)));
+        return ResponseEntity.ok(contentRepository.findByUser(id));
     }
 
     @GetMapping("/Comments/{contentId}")
