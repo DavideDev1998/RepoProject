@@ -17,8 +17,8 @@ public class UserServiceImpl implements GenericsService {
     }
 
     @Override
-    public <T> List<T> findAll() {
-        return (List<T>) repository.findAll();
+    public  List<User> findAll() {
+        return repository.findAll();
     }
 
     @Override

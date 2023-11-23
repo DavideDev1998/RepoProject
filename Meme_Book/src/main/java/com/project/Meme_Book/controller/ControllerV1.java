@@ -29,16 +29,12 @@ public class ControllerV1 {
     @Autowired
     MethodsUtils utils;
 
-    //"/CreationContent/f"//
     @GetMapping("/f")
     public List<Content> findAllDocument() {
         return contentRepository.findAll();
     }
-
-    //"/CreationContent/insert"//
     @PostMapping("/insertContent")
     public void insertContent(@RequestBody RequestData request) {
-
         contentRepository.save(Content.builder()
                 .creator((User) userRepository.findById(request.getId_User()))
                 .creationDate(request.getCreationDate())
@@ -50,6 +46,10 @@ public class ControllerV1 {
         log.info("Inserimento avvenuto con successo");
 
 
+    }
+    @GetMapping("/findContent")
+    public List <Content> findAll(){
+        return contentRepository.findAll();
     }
 
     @PostMapping("/insertComment")
@@ -89,8 +89,6 @@ public class ControllerV1 {
 
         User user = (User) userRepository.findById(request.getId_User());
 
-        //Ho dovuto farlo per forza in maniera estesa perchè con la tua soluzione il like dell'utente mi risultava sempre vuoto,
-        // non so il perchè
 
         utils.createLikeCommentMap(commento, user.getId(), user.getUserName());
 
@@ -124,18 +122,6 @@ public class ControllerV1 {
         return ResponseEntity.ok(mapper.convertToDTO((Content) contentRepository.findById(id)));
     }
 
-    @GetMapping("/s")
-    public void testProvaSuperCostructor() {
-        userRepository.save(
-                User.builder().age(18).
-                        email("www.prova@email.it")
-                        .sex("Male")
-                        .firstName("Lollo")
-                        .lastName("il Pop")
-                        .password("Password")
-                        .roleName("User")
-                        .userName("13sempre")
-                        .build());
-    }
+
 }
 
